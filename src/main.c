@@ -40,11 +40,11 @@ int main(void) {
    ssd1306_init();
    ssd1306_clear_screen();
 
-   ssd1306_draw_sprite(&icon_food);
+   ssd1306_draw_2sprite_or(&icon_food, &icon_selected);
    ssd1306_draw_sprite(&icon_lights);
    ssd1306_draw_sprite(&icon_game);
    ssd1306_draw_sprite(&icon_medicine);
-   ssd1306_draw_sprite(&icon_toilet);
+   ssd1306_draw_2sprite_or(&icon_toilet, &icon_selected);
    ssd1306_draw_sprite(&icon_scale);
    ssd1306_draw_sprite(&icon_discipline);
    ssd1306_draw_sprite(&icon_attention);

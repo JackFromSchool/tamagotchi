@@ -111,3 +111,28 @@ void ssd1306_draw_sprite(struct Sprite *sprite) {
       }
    }
 }
+
+void ssd1306_draw_2sprite_or(struct Sprite *base, struct Sprite *second) {
+   // Get Local Coordinates
+   uint8_t column_start = base->x_pos;
+   uint8_t column_end = base->x_pos + base->width - 1;
+   uint8_t page_start = (base->y_pos) >> 3;
+   uint8_t page_end = (base->y_pos + base->height - 1) >> 3;
+
+   // Set Up Write
+   uint8_t set_address_mode[] = {
+       SET_MEM_ADDR_MODE, 0b00,         SET_PAGE_ADDR, page_start,
+       page_end,          SET_COL_ADDR, column_start,  column_end,
+   };
+
+   ssd1306_send_cmd_list(set_address_mode, sizeof(set_address_mode));
+
+   // Begin Writing
+   uint32_t index = 0;
+   for (uint32_t page = page_start; page <= page_end; page++) {
+      for (uint32_t column = column_start; column <= column_end; column++) {
+         ssd1306_write_data(base->data[index] | second->data[index]);
+         index++;
+      }
+   }
+}

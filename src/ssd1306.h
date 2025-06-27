@@ -178,5 +178,6 @@ void ssd1306_init(void);
 void ssd1306_test(void);
 void ssd1306_clear_screen(void);
 void ssd1306_draw_sprite(struct Sprite *sprite);
+void ssd1306_draw_2sprite_or(struct Sprite *base, struct Sprite *second);
 
 #endif
