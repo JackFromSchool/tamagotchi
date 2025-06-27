@@ -1,6 +1,7 @@
 #include "stm32l0xx.h"
 
 #include "i2c1.h"
+#include "sprite.h"
 #include "ssd1306.h"
 
 void hsi_clock_on(void) {
@@ -18,9 +19,6 @@ void hsi_clock_on(void) {
 }
 
 uint8_t on = 0;
-
-// pb 7 sda
-// pb 6 scl
 
 int main(void) {
    // NOTE: Doesn't work in start up for some reason so it's here
@@ -40,7 +38,16 @@ int main(void) {
 
    i2c1_init();
    ssd1306_init();
-   ssd1306_test();
+   ssd1306_clear_screen();
+
+   ssd1306_draw_sprite(&icon_food);
+   ssd1306_draw_sprite(&icon_lights);
+   ssd1306_draw_sprite(&icon_game);
+   ssd1306_draw_sprite(&icon_medicine);
+   ssd1306_draw_sprite(&icon_toilet);
+   ssd1306_draw_sprite(&icon_scale);
+   ssd1306_draw_sprite(&icon_discipline);
+   ssd1306_draw_sprite(&icon_attention);
 
    while (1) {
       __ASM("nop");

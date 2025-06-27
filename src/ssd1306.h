@@ -3,6 +3,7 @@
 
 #include "delay.h"
 #include "i2c1.h"
+#include "sprite.h"
 #include "stm32l0xx.h"
 
 #define SSD1306_START_PAGE 0
@@ -175,5 +176,7 @@ void ssd1306_send_cmd_list(uint8_t *buf, uint32_t len);
 
 void ssd1306_init(void);
 void ssd1306_test(void);
+void ssd1306_clear_screen(void);
+void ssd1306_draw_sprite(struct Sprite *sprite);
 
 #endif

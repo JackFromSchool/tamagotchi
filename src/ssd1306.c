@@ -78,12 +78,36 @@ void ssd1306_clear_screen(void) {
    }
 }
 
-void ssd1306_test() {
+void ssd1306_test(void) {
    ssd1306_clear_screen();
    while (1) {
       ssd1306_send_cmd(ENTIRE_DISPLAY_ON | 0x1);
       delay_ms(1000);
       ssd1306_send_cmd(ENTIRE_DISPLAY_ON);
       delay_ms(1000);
+   }
+}
+
+void ssd1306_draw_sprite(struct Sprite *sprite) {
+   // Get Local Coordinates
+   uint8_t column_start = sprite->x_pos;
+   uint8_t column_end = sprite->x_pos + sprite->width - 1;
+   uint8_t page_start = (sprite->y_pos) >> 3;
+   uint8_t page_end = (sprite->y_pos + sprite->height - 1) >> 3;
+
+   // Set Up Write
+   uint8_t set_address_mode[] = {
+       SET_MEM_ADDR_MODE, 0b00,         SET_PAGE_ADDR, page_start,
+       page_end,          SET_COL_ADDR, column_start,  column_end,
+   };
+
+   ssd1306_send_cmd_list(set_address_mode, sizeof(set_address_mode));
+
+   // Begin Writing
+   uint32_t index = 0;
+   for (uint32_t page = page_start; page <= page_end; page++) {
+      for (uint32_t column = column_start; column <= column_end; column++) {
+         ssd1306_write_data(sprite->data[index++]);
+      }
    }
 }
