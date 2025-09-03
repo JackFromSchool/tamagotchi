@@ -6,5 +6,5 @@ void tamagotchi_init(void) {
    // Initialize Hardware
 
    i2c1_init();
-   init_inputs();
+   input_init();
 }

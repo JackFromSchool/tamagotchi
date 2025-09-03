@@ -6,5 +6,6 @@
 #include "stm32l0xx.h"
 
 void input_init(void);
+uint8_t input_read(void);
 
 #endif // !INPUT_H

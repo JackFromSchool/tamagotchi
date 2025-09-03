@@ -2,6 +2,7 @@
 #include "stm32l0xx.h"
 
 #include "i2c1.h"
+#include "input.h"
 #include "sprite.h"
 #include "ssd1306.h"
 #include "ui.h"
@@ -43,10 +44,14 @@ int main(void) {
    ssd1306_clear_screen();
 
    ui_init();
+   input_init();
 
    while (1) {
-      delay_ms(1000);
-      ui_next_icon();
+      delay_ms(100);
+      uint8_t inputs = input_read();
+      if (inputs != 0) {
+         ui_next_icon();
+      }
    }
 
    return 0;
