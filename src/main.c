@@ -1,8 +1,10 @@
+#include "delay.h"
 #include "stm32l0xx.h"
 
 #include "i2c1.h"
 #include "sprite.h"
 #include "ssd1306.h"
+#include "ui.h"
 
 void hsi_clock_on(void) {
    // Enable HSI
@@ -40,17 +42,11 @@ int main(void) {
    ssd1306_init();
    ssd1306_clear_screen();
 
-   ssd1306_draw_2sprite_or(&icon_food, &icon_selected);
-   ssd1306_draw_sprite(&icon_lights);
-   ssd1306_draw_sprite(&icon_game);
-   ssd1306_draw_sprite(&icon_medicine);
-   ssd1306_draw_2sprite_or(&icon_toilet, &icon_selected);
-   ssd1306_draw_sprite(&icon_scale);
-   ssd1306_draw_sprite(&icon_discipline);
-   ssd1306_draw_sprite(&icon_attention);
+   ui_init();
 
    while (1) {
-      __ASM("nop");
+      delay_ms(1000);
+      ui_next_icon();
    }
 
    return 0;
