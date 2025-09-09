@@ -47,11 +47,7 @@ int main(void) {
    input_init();
 
    while (1) {
-      delay_ms(100);
-      uint8_t inputs = input_read();
-      if (inputs != 0) {
-         ui_next_icon();
-      }
+      delay_ms(10);
    }
 
    return 0;
