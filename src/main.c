@@ -1,10 +1,10 @@
 #include "delay.h"
 #include "stm32l0xx.h"
 
-#include "i2c1.h"
-#include "input.h"
+#include "drivers/ssd1306.h"
+#include "hardware/i2c1.h"
+#include "hardware/input.h"
 #include "sprite.h"
-#include "ssd1306.h"
 #include "ui.h"
 
 void hsi_clock_on(void) {

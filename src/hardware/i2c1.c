@@ -1,5 +1,4 @@
 #include "i2c1.h"
-#include "stm32l010x8.h"
 
 void i2c1_init(void) {
    // Ensure Clocks Enabled

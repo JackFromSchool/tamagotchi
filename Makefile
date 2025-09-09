@@ -35,6 +35,10 @@ OCD = openocd
 # Sources
 C_SRC   = $(wildcard $(SOURCE_DIR)/*.c)
 ASM_SRC = $(wildcard $(SOURCE_DIR)/*.s)
+C_SRC   += $(wildcard $(SOURCE_DIR)/hardware/*.c)
+ASM_SRC += $(wildcard $(SOURCE_DIR)/hardware/*.s)
+C_SRC   += $(wildcard $(SOURCE_DIR)/drivers/*.c)
+ASM_SRC += $(wildcard $(SOURCE_DIR)/drivers/*.s)
 
 INCLUDE = -I$(INCLUDE_DIR)
 LINKER = STM32L010XX_FLASH.ld
@@ -80,6 +84,7 @@ $(BUILD_DIR)/$(PROJECT).elf: $(OBJECTS)
 
 # Compilation
 
+# Root of Source
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(GC_FLAGS) -c $< -o $@
@@ -87,3 +92,22 @@ $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.s
 	@mkdir -p $(dir $@)
 	$(AS) $(AS_FLAGS) -o $@ $<
+
+# Hardware
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/hardware/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(GC_FLAGS) -c $< -o $@
+
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/hardware/%.s
+	@mkdir -p $(dir $@)
+	$(AS) $(AS_FLAGS) -o $@ $<
+
+# Drivers
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/drivers/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(GC_FLAGS) -c $< -o $@
+
+$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/drivers/%.s
+	@mkdir -p $(dir $@)
+	$(AS) $(AS_FLAGS) -o $@ $<
+

@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#include "drivers/ssd1306.h"
 #include "sprite.h"
-#include "ssd1306.h"
 #include "stm32l0xx.h"
 
 void ui_init(void);

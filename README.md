@@ -23,7 +23,7 @@ does help out. Just be sure to credit me!
 
 ## Progress
 
-- [ ] Working Hardware Drivers
+- [x] Working Hardware Drivers
 - [ ] Tamagotchi Evolution Stages
 - [ ] Audio Systems
 - [ ] Custom PCB

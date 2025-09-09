@@ -1,6 +1,4 @@
 #include "ui.h"
-#include "sprite.h"
-#include "ssd1306.h"
 
 #define NO_SELECTION 255U
 

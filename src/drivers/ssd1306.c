@@ -1,5 +1,4 @@
 #include "ssd1306.h"
-#include "i2c1.h"
 #include <stdint.h>
 
 void ssd1306_send_cmd(uint8_t cmd) {

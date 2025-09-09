@@ -1,9 +1,9 @@
 #ifndef SSD1306_H
 #define SSD1306_H
 
-#include "delay.h"
-#include "i2c1.h"
-#include "sprite.h"
+#include "../delay.h"
+#include "../hardware/i2c1.h"
+#include "../sprite.h"
 #include "stm32l0xx.h"
 
 #define SSD1306_START_PAGE 0

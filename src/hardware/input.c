@@ -1,6 +1,4 @@
 #include "input.h"
-#include "stm32l010x8.h"
-#include "ui.h"
 
 void input_init(void) {
    // Ensure peripheral is on
