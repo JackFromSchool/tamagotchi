@@ -1,5 +1,13 @@
 #include "input.h"
 
+static void default_callback(uint8_t) { return; }
+
+static void (*input_callback)(uint8_t) = *default_callback;
+
+void input_register_callback(void (*callback)(uint8_t)) {
+   input_callback = callback;
+}
+
 void input_init(void) {
    // Ensure peripheral is on
    RCC->IOPENR |= RCC_IOPENR_GPIOAEN;
@@ -25,15 +33,19 @@ void input_init(void) {
 }
 
 void EXTI0_1_IRQHandler(void) {
-   // Clear Interrupt
-   EXTI->PR |= 0b01;
-   ui_next_icon();
+   // Read Pending Interrupts
+   uint8_t pending = EXTI->PR;
+   // Clear Interrupts
+   EXTI->PR = pending;
+   input_callback(pending);
 }
 
 void EXTI2_3_IRQHandler(void) {
-   // Clear Interrupt
-   EXTI->PR |= 0b10;
-   ui_next_icon();
+   // Read Pending Interrupts
+   uint8_t pending = EXTI->PR;
+   // Clear Interrupts
+   EXTI->PR = pending;
+   input_callback(pending);
 }
 
 uint8_t input_read(void) {

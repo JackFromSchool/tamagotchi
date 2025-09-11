@@ -5,6 +5,7 @@
 #include <stddef.h>
 
 #include "drivers/ssd1306.h"
+#include "hardware/input.h"
 #include "sprite.h"
 #include "stm32l0xx.h"
 

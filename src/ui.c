@@ -8,7 +8,7 @@ static struct Sprite *const selection_list[] = {
 
 static uint8_t selected_sprite = NO_SELECTION;
 
-void ui_redraw(void) {
+static void ui_redraw(void) {
    ssd1306_draw_sprite(&icon_food);
    ssd1306_draw_sprite(&icon_lights);
    ssd1306_draw_sprite(&icon_game);
@@ -19,7 +19,24 @@ void ui_redraw(void) {
    ssd1306_draw_sprite(&icon_attention);
 }
 
-void ui_init(void) { ui_redraw(); }
+static void input_callback(uint8_t input) {
+   if (input & 0b100) {
+      ui_next_icon();
+   }
+   if (input & 0b010) {
+   }
+   if (input & 0b001) {
+      ui_cancel_selection();
+   }
+}
+
+void ui_init(void) {
+   // Draw UI for the first time
+   ui_redraw();
+
+   // Register Callbacks
+   input_register_callback(*input_callback);
+}
 
 void ui_next_icon(void) {
    if (selected_sprite == NO_SELECTION) {
